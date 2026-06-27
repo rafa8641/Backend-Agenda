@@ -2,6 +2,9 @@ package agenda.entity;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -48,8 +51,10 @@ public class Usuario {
     @NotNull
     @NotEmpty
     @Size(min = 8, message = "A senha deve ter no mínimo 8 caracteres" , max = 60)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String senha;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "usuario")
     private List<Contato> contatos;
 
