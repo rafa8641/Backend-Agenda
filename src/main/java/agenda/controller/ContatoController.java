@@ -1,8 +1,10 @@
 package agenda.controller;
 
 import java.net.URI;
+import java.util.List;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,6 +21,7 @@ import agenda.entity.Usuario;
 import agenda.service.ContatoService;
 import jakarta.validation.Valid;
 
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/contatos")
 public class ContatoController {
@@ -69,6 +72,11 @@ public class ContatoController {
     public ResponseEntity<Iterable<Contato>> findByUsuarioId(@PathVariable Long usuarioId){
         Iterable<Contato> contatos = this.contatoService.findByUsuarioId(usuarioId);
         return ResponseEntity.ok().body(contatos);
+    }
+
+    @GetMapping("/usuario/{usuarioId}/ativos")
+    public ResponseEntity<List<Contato>> findAtivos(@PathVariable Long usuarioId) {
+        return ResponseEntity.ok(contatoService.findAtivosByUsuario(usuarioId));
     }
 
     @PutMapping("/{id}")

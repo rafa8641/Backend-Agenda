@@ -3,6 +3,7 @@ package agenda.controller;
 import java.net.URI;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,6 +18,7 @@ import agenda.entity.Usuario;
 import agenda.service.UsuarioService;
 import jakarta.validation.Valid;
 
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/usuarios")
 public class UsuarioController {
